@@ -12,14 +12,16 @@ public class A3AnaliseDeAlgoritmos {
     int[] vcm = new int[100000];
     int[] vM = new int[1000000];
     
-    vcm = met.numerarInveso(vcm);
-    vcm = met.desordenado(vcm);
-    System.out.println(Arrays.toString(vcm));
+    /*
+    vdm = met.numerarInveso(vdm);
+    vdm = met.desordenado(vdm);
+    System.out.println(Arrays.toString(vdm));
     System.out.println(" ");
-    met.quick(vcm, 0, vcm.length - 1);
-        System.out.println(Arrays.toString(vcm));
-        System.out.println(met.getTrocaQuick());
-        System.out.println(met.getTempoQuick());
-    }
+    met.quick(vdm,0,vdm.length-1);
+    met.quickToString(vdm);
+    */
     
+    
+    
+    }   
 }
