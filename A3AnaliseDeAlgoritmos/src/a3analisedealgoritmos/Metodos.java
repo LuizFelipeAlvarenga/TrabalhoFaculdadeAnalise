@@ -3,8 +3,8 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Metodos {
-    static int trocasQuick = 0;
-    static int compQuick = 0;
+    static long trocasQuick = 0;
+    static long compQuick = 0;
     static long inicioQuick;
     static long fimQuick;
         
@@ -15,7 +15,7 @@ public class Metodos {
         return vetor;
     }
     
-    public static  int[] numerarInveso(int... vetor){
+    public static  int[] numerarInverso(int... vetor){
         for (int i = 0; i < vetor.length; i++) {
             int x = vetor.length - i;
             vetor[i] = x;            
@@ -35,13 +35,13 @@ public class Metodos {
     }
     
     public static  void bubble(int... vetor){
-        int trocas = 0;
-        int comp = 0;
+        long trocas = 0;
+        long comp = 0;
         long inicio = System.nanoTime();
                 for (int j = 0; j < vetor.length; j++) {
             for(int i = 0; i<vetor.length-1;i++){
                 comp++;
-                if(vetor[i]>vetor[i+1]){
+                if((vetor[i]>vetor[i+1])&&(i+1<vetor.length)){
                     int temp = vetor[i+1];
                     vetor[i+1] = vetor[i];
                     vetor[i] = temp;              
@@ -59,8 +59,8 @@ public class Metodos {
     
     public static  void selection(int... vetor){        
        int temp;
-       int trocas = 0;
-       int comp = 0;
+       long trocas = 0;
+       long comp = 0;
        long inicio = System.nanoTime();
        for (int i = 0; i <vetor.length; i++){
             int j = i;
@@ -86,8 +86,8 @@ public class Metodos {
 
     public static void insertion(int... vetor) {
         long inicio = System.nanoTime();
-        int trocas = 0;
-        int comp = 0;
+        long trocas = 0;
+        long comp = 0;
         for (int i = 1; i < vetor.length; i++) {
             int j = i;
             int b = vetor[i];
