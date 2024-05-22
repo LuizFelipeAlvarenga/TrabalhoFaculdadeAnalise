@@ -3,19 +3,21 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Metodos {
-    static long trocasQuick = 0;
-    static long compQuick = 0;
-    static long inicioQuick;
-    static long fimQuick;
+    long trocasQuick = 0;
+    long trocasMerge = 0;
+    long compQuick = 0;
+    long compMerge = 0;
+    long inicioQuick;
+    long fimQuick;
         
-    public static  int[] numerar(int... vetor){        
+    public int[] numerar(int... vetor){
         for (int i = 0; i < vetor.length; i++) {
             vetor[i] = i+1;           
         }        
         return vetor;
     }
     
-    public static  int[] numerarInverso(int... vetor){
+    public int[] numerarInverso(int... vetor){
         for (int i = 0; i < vetor.length; i++) {
             int x = vetor.length - i;
             vetor[i] = x;            
@@ -23,7 +25,7 @@ public class Metodos {
         return vetor;
     }
     
-    public static  int[] desordenado(int... vetor){
+    public int[] desordenado(int... vetor){
         Random rdm = new Random();
         for (int i = vetor.length-1; i > 0; i--) {
             int j = rdm.nextInt(i+1);
@@ -34,11 +36,11 @@ public class Metodos {
         return vetor;
     }
     
-    public static  void bubble(int... vetor){
+    public void bubble(int... vetor){
         long trocas = 0;
         long comp = 0;
         long inicio = System.nanoTime();
-                for (int j = 0; j < vetor.length; j++) {
+        for (int j = 0; j < vetor.length; j++) {
             for(int i = 0; i<vetor.length-1;i++){
                 comp++;
                 if((vetor[i]>vetor[i+1])&&(i+1<vetor.length)){
@@ -48,16 +50,16 @@ public class Metodos {
                     trocas++;
                 }
             }                         
+        }
+        //System.out.println(Arrays.toString(vetor));
+        long fim = System.nanoTime();
+        long tempo = (fim - inicio);
+        System.out.println("Trocas: " + trocas);
+        System.out.println("Comparações: " + comp);
+        System.out.println("Tempo: " + tempo + "ns");
     }
-                System.out.println(Arrays.toString(vetor)); 
-                long fim = System.nanoTime();
-                long tempo = (fim - inicio);
-                System.out.println("O numero de trocas foi de: " + trocas);
-                System.out.println("O numero de comparacoes foi de: " + comp);
-                System.out.println("Tempo: " + tempo + "ns");                
-  }
     
-    public static  void selection(int... vetor){        
+    public void selection(int... vetor){
        int temp;
        long trocas = 0;
        long comp = 0;
@@ -75,16 +77,16 @@ public class Metodos {
            vetor[j] = temp;
            trocas++;
        }
-       System.out.println(Arrays.toString(vetor));
+       //System.out.println(Arrays.toString(vetor));
        long fim = System.nanoTime();
        long tempo = (fim - inicio);
-       System.out.println("O numero de trocas foi " + trocas);
-       System.out.println("O numero de comparacoes foi de: " + comp);
+       System.out.println("Trocas: " + trocas);
+       System.out.println("Comparações: " + comp);
        System.out.println("Tempo: " + tempo + "ns");
        
     }
 
-    public static void insertion(int... vetor) {
+    public void insertion(int... vetor) {
         long inicio = System.nanoTime();
         long trocas = 0;
         long comp = 0;
@@ -99,15 +101,15 @@ public class Metodos {
             }
             vetor[j] = b;
         }
-        System.out.println(Arrays.toString(vetor));
+        //System.out.println(Arrays.toString(vetor));
         long fim = System.nanoTime();
         long tempo = (fim - inicio);
-        System.out.println("O numero de trocas foi " + trocas);
-        System.out.println("O numero de comparacoes foi de: " + comp);
+        System.out.println("Trocas: " + trocas);
+        System.out.println("Comparações: " + comp);
         System.out.println("Tempo: " + tempo + "ns");
     }
 
-    public static void quick(int[] vetor, int esq, int dir){        
+    public void quick(int[] vetor, int esq, int dir){
         if(trocasQuick==0){
          inicioQuick = System.nanoTime();
         }
@@ -121,7 +123,7 @@ public class Metodos {
         compQuick++;
     }
 
-    public static int particao(int [] vetor, int esq, int dir){
+    public int particao(int [] vetor, int esq, int dir){
         int pivo = vetor[(esq+dir)/2];
         int aux;
         int i = esq - 1;
@@ -144,50 +146,71 @@ public class Metodos {
         }        
     }
     
-    public static void quickToString(int... vetor){
-        System.out.println(Arrays.toString(vetor));
-        System.out.println("O numero de trocas foi " + trocasQuick);
-        System.out.println("O numero de comparacoes foi de: " + compQuick);
+    public void quickToString(int... vetor){
+        //System.out.println(Arrays.toString(vetor));
+        System.out.println("Trocas: " + trocasQuick);
+        System.out.println("Comparações " + compQuick);
         System.out.println("Tempo: " + (fimQuick - inicioQuick) + "ns");
     }
 
-    public static void merge(int inicio, int tamanho, int[] vetor) {
-        int[] info = new int [2];
-        
-        if (inicio < tamanho - 1) {
-            int meio = (inicio + tamanho) / 2;
-            merge(inicio, meio, vetor);
-            merge(meio, tamanho, vetor);
-            intercalar(inicio, meio, tamanho, vetor);
+    public void merge(int[] vetor){
+        int tamanho = vetor.length;
+        int meio = tamanho/2;
+        int[] esquerda = new int[meio];
+        int[] direita = new int[tamanho - meio];
+
+        if(tamanho < 2){
+            return;
         }
+
+        // Populando as duas metades
+        System.arraycopy(vetor, 0, esquerda, 0, meio);
+        if (tamanho - meio >= 0) System.arraycopy(vetor, meio, direita, 0, tamanho - meio);
+
+        merge(esquerda);
+        merge(direita);
+        intercalar(vetor, esquerda, direita);
     }
- 
-    private static void intercalar(int inicio, int meio, int tamanho, int[] vetor) {
-        int i, j, k;
-        int[] auxiliar = new int[tamanho - inicio];
-        i = inicio;
-        j = meio;
-        k = 0;
-        while (i < meio && j < tamanho) {
-            if (vetor[i] <= vetor[j]) { 
-                auxiliar[k] = vetor[i];
-                k++; i++;
-            } else {
-                auxiliar[k] = vetor[j];
-                k++; j++;
+
+    private void intercalar (int[] vetor, int[] esquerda, int[] direita){
+        int tamEsq = esquerda.length;
+        int tamDir = direita.length;
+        int i = 0, j = 0, k = 0;
+
+        while(i < tamEsq && j < tamDir){
+            if(esquerda[i] <= direita[j]){
+                vetor[k] = esquerda[i];
+                i++;
+                trocasMerge++;
             }
+            else{
+                vetor[k] = direita[j];
+                j++;
+            }
+            compMerge++;
+            k++;
         }
-        while (i < meio) {
-            auxiliar[k] = vetor[i];
-            k++; i++;
+        while(i < tamEsq){
+            vetor[k] = esquerda[i];
+            trocasMerge++;
+            i++;
+            k++;
         }
-        while (j < tamanho) {
-            auxiliar[k] = vetor[j];
-            k++; j++;
-        }
-        for (i = inicio; i < tamanho; i++) {
-            vetor[i] = auxiliar[i - inicio];
+        while(j < tamDir){
+            vetor[k] = direita[j];
+            trocasMerge++;
+            j++;
+            k++;
         }
     }
+
+    public void mergeToString(int... vetor){
+        //System.out.println(Arrays.toString(vetor));
+        System.out.println("Trocas: " + trocasQuick);
+        System.out.println("Comparações " + compQuick);
+        System.out.println("Tempo: " + (fimQuick - inicioQuick) + "ns");
+    }
+
+
 
 }
