@@ -6,28 +6,19 @@ public class A3AnaliseDeAlgoritmos {
 
     public static void main(String[] args) {
         Metodos met = new Metodos();
-        int [] teste = {2,1};
-        int[] vc = new int[100];
-        int[] vm = new int[1000];
-        int[] vdm = new int[10000];
-        int[] vcm = new int[100000];
-        int[] vM = new int[1000000];
+        int[][][] listas = new int [3][5][];
+        String[] nomes = {"ordenadas - crescente", "ordenadas - decrescente", "desordenadas"};
+        String[] nomeMetodo = {"Bubble", "Selection", "Insertion", "Quick", "Merge"};
+
+        for (int i = 2; i < 7; i++) {
+            listas[0][i-2] = met.numerar((int)Math.pow(10,i));
+            listas[1][i-2] = met.numerarInverso((int)Math.pow(10,i));
+            listas[2][i-2] = met.numerar((int)Math.pow(10,i));
+            listas[2][i-2] = met.desordenar(listas[2][i-2]);
+        }
 
 
-        vc = met.numerarInverso(vc);
-        vc = met.desordenado(vc);
-        /*
-        System.out.println(Arrays.toString(vdm));
-        System.out.println(" ");
-        met.quick(vdm,0,vdm.length-1);
-        met.quickToString(vdm);
-        */
-
-        //met.merge(0, vc.length-1,vc);
-        met.merge(teste);
-        System.out.println("Trocas: "+ met.trocasMerge + "\nComparações: " + met.compMerge);
-        System.out.println(Arrays.toString(teste));
-
+        met.testarSort(4,listas[1][0]);
     
     
     

@@ -7,17 +7,19 @@ public class Metodos {
     long trocasMerge = 0;
     long compQuick = 0;
     long compMerge = 0;
-    long inicioQuick;
-    long fimQuick;
+    long inicioQuick, fimQuick, inicioMerge, fimMerge;
         
-    public int[] numerar(int... vetor){
+    public int[] numerar(int tamanho){
+        int[] vetor = new int[tamanho];
         for (int i = 0; i < vetor.length; i++) {
             vetor[i] = i+1;           
         }        
         return vetor;
     }
     
-    public int[] numerarInverso(int... vetor){
+    public int[] numerarInverso(int tamanho){
+        int[] vetor = new int[tamanho];
+
         for (int i = 0; i < vetor.length; i++) {
             int x = vetor.length - i;
             vetor[i] = x;            
@@ -25,7 +27,7 @@ public class Metodos {
         return vetor;
     }
     
-    public int[] desordenado(int... vetor){
+    public int[] desordenar(int... vetor){
         Random rdm = new Random();
         for (int i = vetor.length-1; i > 0; i--) {
             int j = rdm.nextInt(i+1);
@@ -146,7 +148,7 @@ public class Metodos {
         }        
     }
     
-    public void quickToString(int... vetor){
+    public void quickToString(){
         //System.out.println(Arrays.toString(vetor));
         System.out.println("Trocas: " + trocasQuick);
         System.out.println("Comparações " + compQuick);
@@ -154,6 +156,10 @@ public class Metodos {
     }
 
     public void merge(int[] vetor){
+        if(trocasMerge==0){
+            inicioMerge = System.nanoTime();
+        }
+
         int tamanho = vetor.length;
         int meio = tamanho/2;
         int[] esquerda = new int[meio];
@@ -170,6 +176,7 @@ public class Metodos {
         merge(esquerda);
         merge(direita);
         intercalar(vetor, esquerda, direita);
+        fimMerge = System.nanoTime();
     }
 
     private void intercalar (int[] vetor, int[] esquerda, int[] direita){
@@ -204,13 +211,46 @@ public class Metodos {
         }
     }
 
-    public void mergeToString(int... vetor){
+    public void mergeToString(){
         //System.out.println(Arrays.toString(vetor));
-        System.out.println("Trocas: " + trocasQuick);
-        System.out.println("Comparações " + compQuick);
-        System.out.println("Tempo: " + (fimQuick - inicioQuick) + "ns");
+        System.out.println("Trocas: " + trocasMerge);
+        System.out.println("Comparações: " + compMerge);
+        System.out.println("Tempo: " + (fimMerge - inicioMerge) + "ns");
     }
 
+    private void resetTroComp(){
+        trocasQuick = 0;
+        compQuick = 0;
+        trocasMerge = 0;
+        compMerge = 0;
+    }
 
+    public void testarSort(int metodo, int[] vetor){
+        int[] array = vetor.clone();
+
+        switch (metodo){
+            case 0:
+                bubble(array);
+                break;
+            case 1:
+                selection(array);
+                break;
+            case 2:
+                insertion(array);
+                break;
+            case 3:
+                quick(array, 0, array.length-1);
+                quickToString();
+                break;
+            case 4:
+                merge(array);
+                mergeToString();
+                break;
+            default:
+                System.out.println("Método Inválido.");
+                break;
+        }
+        resetTroComp();
+    }
 
 }
