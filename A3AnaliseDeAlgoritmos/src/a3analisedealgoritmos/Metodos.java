@@ -1,5 +1,4 @@
 package a3analisedealgoritmos;
-import java.util.Arrays;
 import java.util.Random;
 
 public class Metodos {
@@ -58,7 +57,7 @@ public class Metodos {
         long tempo = (fim - inicio);
         System.out.println("Trocas: " + trocas);
         System.out.println("Comparações: " + comp);
-        System.out.println("Tempo: " + tempo + "ns");
+        System.out.println("Tempo: " + tempo + " ns");
     }
     
     public void selection(int... vetor){
@@ -84,7 +83,7 @@ public class Metodos {
        long tempo = (fim - inicio);
        System.out.println("Trocas: " + trocas);
        System.out.println("Comparações: " + comp);
-       System.out.println("Tempo: " + tempo + "ns");
+       System.out.println("Tempo: " + tempo + " ns");
        
     }
 
@@ -102,13 +101,14 @@ public class Metodos {
                 trocas++;
             }
             vetor[j] = b;
+            trocas++;
         }
         //System.out.println(Arrays.toString(vetor));
         long fim = System.nanoTime();
         long tempo = (fim - inicio);
         System.out.println("Trocas: " + trocas);
         System.out.println("Comparações: " + comp);
-        System.out.println("Tempo: " + tempo + "ns");
+        System.out.println("Tempo: " + tempo + " ns");
     }
 
     public void quick(int[] vetor, int esq, int dir){
@@ -133,11 +133,11 @@ public class Metodos {
         while(true){
             do{
                 i++;
-                this.compQuick++;
+                compQuick++;
             }while(vetor[i] < pivo);
             do{
                 j--;
-                this.compQuick++;
+                compQuick++;
             }while(vetor[j] > pivo);
             if(i >= j){
                 return j; 
@@ -145,7 +145,7 @@ public class Metodos {
             aux = vetor[i];
             vetor[i] = vetor[j];
             vetor[j] = aux;
-            this.trocasQuick++;
+            trocasQuick++;
         }        
     }
     
@@ -153,7 +153,7 @@ public class Metodos {
         //System.out.println(Arrays.toString(vetor));
         System.out.println("Trocas: " + trocasQuick);
         System.out.println("Comparações: " + compQuick);
-        System.out.println("Tempo: " + (fimQuick - inicioQuick) + "ns");
+        System.out.println("Tempo: " + (fimQuick - inicioQuick) + " ");
     }
 
     public void merge(int[] vetor){
@@ -216,7 +216,7 @@ public class Metodos {
         //System.out.println(Arrays.toString(vetor));
         System.out.println("Trocas: " + trocasMerge);
         System.out.println("Comparações: " + compMerge);
-        System.out.println("Tempo: " + (fimMerge - inicioMerge) + "ns");
+        System.out.println("Tempo: " + (fimMerge - inicioMerge) + " ns");
     }
 
     private void resetTroComp(){
