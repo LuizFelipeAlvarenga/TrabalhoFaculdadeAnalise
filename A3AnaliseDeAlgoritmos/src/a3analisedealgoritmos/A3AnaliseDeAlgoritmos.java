@@ -7,7 +7,7 @@ public class A3AnaliseDeAlgoritmos {
     public static void main(String[] args) {
         Metodos met = new Metodos();
         int[][][] listas = new int [3][5][];
-        String[] nomes = {"ordenadas - crescente", "ordenadas - decrescente", "desordenadas"};
+        String[] nomes = {"ordenadas: crescente", "ordenadas: decrescente", "desordenadas"};
         String[] nomeMetodo = {"Bubble", "Selection", "Insertion", "Quick", "Merge"};
 
         for (int i = 2; i < 7; i++) {
@@ -18,9 +18,16 @@ public class A3AnaliseDeAlgoritmos {
         }
 
 
-        met.testarSort(4,listas[1][0]);
-    
-    
+        for (int x = 0; x < 5; x++) {
+            System.out.println("\n<< " + nomeMetodo[x] + " Sort >>\n");
+            for (int i = 0; i < 3; i++) {
+                System.out.println("\n-- Listas "+nomes[i]+" --\n");
+                for (int j = 0; j < 4; j++) {
+                    met.testarSort(x, listas[i][j]);
+                    System.out.println();
+                }
+            }
+        }
     
     }   
 }

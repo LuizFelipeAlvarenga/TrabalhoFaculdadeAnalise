@@ -122,7 +122,6 @@ public class Metodos {
             
         }
         fimQuick = System.nanoTime();
-        compQuick++;
     }
 
     public int particao(int [] vetor, int esq, int dir){
@@ -133,10 +132,12 @@ public class Metodos {
 
         while(true){
             do{
-                i++;   
+                i++;
+                this.compQuick++;
             }while(vetor[i] < pivo);
             do{
-                j--;    
+                j--;
+                this.compQuick++;
             }while(vetor[j] > pivo);
             if(i >= j){
                 return j; 
@@ -144,14 +145,14 @@ public class Metodos {
             aux = vetor[i];
             vetor[i] = vetor[j];
             vetor[j] = aux;
-            trocasQuick++;             
+            this.trocasQuick++;
         }        
     }
     
     public void quickToString(){
         //System.out.println(Arrays.toString(vetor));
         System.out.println("Trocas: " + trocasQuick);
-        System.out.println("Comparações " + compQuick);
+        System.out.println("Comparações: " + compQuick);
         System.out.println("Tempo: " + (fimQuick - inicioQuick) + "ns");
     }
 
@@ -227,6 +228,7 @@ public class Metodos {
 
     public void testarSort(int metodo, int[] vetor){
         int[] array = vetor.clone();
+        System.out.println("[ Vetor tamanho " + array.length + " ]");
 
         switch (metodo){
             case 0:
